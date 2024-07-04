@@ -35,13 +35,4 @@ CREATE TABLE ext_requests AS SELECT * FROM oltp.requests WHERE 1=2;
 -- Confirmación
 SELECT 'Tablas ext_ creadas correctamente en staging.';
 
-CREATE TABLE tra_programs (
-    id INT,
-    name VARCHAR(255),
-    date_from DATE,
-    date_to DATE,
-    is_store_active BOOLEAN,
-    coin_name VARCHAR(50),
-    is_deleted BOOLEAN
-);
 

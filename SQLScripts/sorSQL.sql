@@ -71,20 +71,26 @@ CREATE TABLE Dim_Time (
     week INT
 );
 
+USE sor;
+SHOW TABLES;
+SELECT COUNT(*) FROM Dim_Groups;
+SELECT * FROM Dim_Groups LIMIT 10;
+
+
 CREATE TABLE Fact_Requests (
-    fact_request_id INT PRIMARY KEY AUTO_INCREMENT,
-    program_id INT,
-    group_id INT,
-    address_id INT,
-    date_id INT,
-    quantity INT,
-    used_cost DECIMAL(10, 2),
-    points INT,
-    FOREIGN KEY (program_id) REFERENCES Dim_Programs(program_id),
-    FOREIGN KEY (group_id) REFERENCES Dim_Groups(group_id),
-    FOREIGN KEY (address_id) REFERENCES Dim_Address(address_id),
-    FOREIGN KEY (date_id) REFERENCES Dim_Time(date_id)
-);
+     fact_request_id INT PRIMARY KEY AUTO_INCREMENT,
+     program_id INT,
+     group_id INT,
+     address_id INT,
+     date_id INT,
+     quantity INT,
+     used_cost DECIMAL(10, 2),
+     points INT,
+     FOREIGN KEY (program_id) REFERENCES Dim_Programs(program_id),
+     FOREIGN KEY (group_id) REFERENCES Dim_Groups(group_id),
+     FOREIGN KEY (address_id) REFERENCES Dim_Address(address_id),
+     FOREIGN KEY (date_id) REFERENCES Dim_Time(date_id)
+ );
 
 
 CREATE TABLE Fact_Awards_Claims (
@@ -129,5 +135,16 @@ CREATE TABLE Fact_Invoice_Billing (
     FOREIGN KEY (date_id) REFERENCES Dim_Time(date_id)
 );
 
+CREATE TABLE Fact_Invoice_Items (
+    fact_invoice_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    invoice_id INT,
+    item_name VARCHAR(255),
+    quantity INT,
+    cost DECIMAL(10, 2),
+    total DECIMAL(10, 2),
+    date_id INT,
+    FOREIGN KEY (invoice_id) REFERENCES Fact_Invoice_Billing(fact_invoice_id),
+    FOREIGN KEY (date_id) REFERENCES Dim_Time(date_id)
+);
 
-
+select * from Dim_Programs
